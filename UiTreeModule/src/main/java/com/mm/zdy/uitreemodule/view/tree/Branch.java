@@ -35,7 +35,7 @@ public class Branch {
             bazier(part * currentLength);
             draw(canvas, scaleFactor);
             currentLength++;
-            radius *= 0.8;
+            radius *= 0.97f;
             return true;
         }
         return false;

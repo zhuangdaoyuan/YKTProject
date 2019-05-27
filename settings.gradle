@@ -1,2 +1,2 @@
-include ':NDKModule'
+//include ':NDKModule'
 include ':UiTreeModule'

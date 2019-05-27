@@ -37,7 +37,7 @@ public class Tree {
     private Paint snapshotPaint = new Paint();
 
     private float snapshotDx;
-    private float xOffset = 200f;
+    private float xOffset = 20f;
     private float maxOffset;
 
 
@@ -104,7 +104,7 @@ public class Tree {
         }
         if (growingBranches.isEmpty()) {
             //绘制树干完成
-            step = Step.BLOOMS_GROWING;
+//            step = Step.BLOOMS_GROWING;
         }
 
     }
