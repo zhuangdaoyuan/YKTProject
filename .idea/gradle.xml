@@ -8,7 +8,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/CommonApp" />
             <option value="$PROJECT_DIR$/NDKModule" />
+            <option value="$PROJECT_DIR$/RecyclerAdapter" />
             <option value="$PROJECT_DIR$/UiTreeModule" />
           </set>
         </option>

@@ -1,2 +1,4 @@
 include ':NDKModule'
+include ':CommonApp'
+include ':RecyclerAdapter'
 include ':UiTreeModule'
