@@ -2,6 +2,7 @@ package com.mm.zdy.uitreemodule.view.tree;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 
@@ -59,4 +60,23 @@ public class FallingBloom extends Bloom {
         canvas.restore();
     }
 
+    private void draw(Canvas canvas){
+        Paint paint = CommonUtil.getPaint();
+        paint.setAntiAlias(true);
+        paint.setColor(color);
+        canvas.save();
+        canvas.translate(position.x,position.y);
+        canvas.rotate(angle);
+        canvas.translate(-sMaxRadius,-sMaxRadius);
+        canvas.drawBitmap(snapshot.bitmap,0,0,paint);
+        canvas.restore();
+    }
+
+    public void reset(float x, float y) {
+        this.position.y = x;
+        this.position.y = y;
+        this.color = Color.argb(255,255,CommonUtil.random(255),CommonUtil.random(255));
+        this.angle = CommonUtil.random(360);
+        validate = false;
+    }
 }

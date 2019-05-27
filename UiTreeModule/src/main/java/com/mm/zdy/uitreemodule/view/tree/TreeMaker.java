@@ -1,9 +1,17 @@
 package com.mm.zdy.uitreemodule.view.tree;
 
+import java.util.List;
+
 public class TreeMaker {
 
-    public static void init(int canvasHeight, float radius) {
+    private static float r;
+    private static float c;
+    private static int p;
+    private static FallingBloom[] sRecycleBlooms = new FallingBloom[8];
 
+    public static void init(int canvasHeight, float crownRadiusFactor) {
+        r = canvasHeight * crownRadiusFactor;
+        c = r * 1.35f;
     }
 
     public static Branch getBranches() {
@@ -33,7 +41,38 @@ public class TreeMaker {
         return branches[0];
     }
 
-    public static boolean isHeart(float px, float py, float r) {
+    public static void recycleBloom(FallingBloom fallingBloom) {
+        if (p < sRecycleBlooms.length) {
+            while (true) {
+                float x = CommonUtil.random(-c, c);
+                float y = CommonUtil.random(-c, c);
+                if (inHeart(x, y, r)) {
+                    fallingBloom.reset(x, -y);
+                    break;
+                }
+            }
+            sRecycleBlooms[p++] = fallingBloom;
+        }
+    }
+
+    public static void fillBlooms(List<Bloom> bloomList, int num) {
+        int n = 0;
+        while (n < num && p > 0) {
+            bloomList.add(sRecycleBlooms[--p]);
+            n++;
+        }
+    }
+
+    public static void fillFallingBlooms(List<FallingBloom> bloomList, int num) {
+        int n = 0;
+        while (n < num && p > 0) {
+            bloomList.add(sRecycleBlooms[--p]);
+            n++;
+        }
+    }
+
+
+    public static boolean inHeart(float px, float py, float r) {
         float x = px / r;
         float y = py / r;
         float sx = x * x;
@@ -41,4 +80,5 @@ public class TreeMaker {
         float a = sx + sy - 1;
         return a * a * a - sx * sy * y < 0;
     }
+
 }

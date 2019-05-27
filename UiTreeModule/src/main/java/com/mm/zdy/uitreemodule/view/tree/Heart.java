@@ -13,7 +13,7 @@ public class Heart {
         int n = 100;
         Point[] points = new Point[n];
         float t = 0f;
-        float dt = (float) (2 * Math.PI / (n - 1));
+        float dt = (float) (2 * Math.PI / (n - 1));//每次绘制的角度
         for (int i = 0; i < n; i++) {
             float x = (float) (16 * (Math.pow(Math.sin(t), 3)));
             float y = (float) (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
@@ -26,7 +26,7 @@ public class Heart {
             }
 
         }
-        PATH.close();
+        PATH.close();//闭合
     }
 
     public static float getRADIUS() {

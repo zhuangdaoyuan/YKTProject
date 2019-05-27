@@ -7,12 +7,12 @@ import android.graphics.Paint;
 //树叶
 public class Bloom {
     static float sMaxScale = 0.2f;
-    static int sMaxRadius = Math.round(sMaxScale * Heart.getRADIUS());
+    static int sMaxRadius = Math.round(sMaxScale * Heart.getRADIUS());//1.25 = 1，1.56 =2 四舍五入
     static float sFactor;
     Point position;
     int color;
-    float angle;
-    float scale;
+    float angle;//叶片角度
+    float scale;//叶片缩放大小
     private boolean isOdd;//
 
     Bloom(Point position) {
@@ -42,7 +42,8 @@ public class Bloom {
         }
         return false;
     }
-    void draw(Canvas canvas){
+
+    private void draw(Canvas canvas){
         Paint paint = CommonUtil.getPaint();
         paint.setColor(color);
         float r = getRadius();

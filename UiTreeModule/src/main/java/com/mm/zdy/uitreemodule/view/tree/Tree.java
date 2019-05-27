@@ -4,8 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Tree {
     //1绘制树干（贝塞尔曲线）
@@ -16,7 +18,7 @@ public class Tree {
         BRANCHES_GROWING,//树干长大
         BLOOMS_GROWING,//树叶长大
         MOVING_SNAPSHOT,//移动快照
-        BLOOPS_FALLING,//树叶掉落
+        BLOOMS_FALLING,//树叶掉落
     }
 
     private Step step = Step.BRANCHES_GROWING;
@@ -40,11 +42,24 @@ public class Tree {
     private float xOffset = 20f;
     private float maxOffset;
 
+    //Blooms
+    private static final int BLOOM_NUM = 320;
+    private static final int BLOOMING_NUM = BLOOM_NUM / 8;
+
+    //FallingBloom
+    private float fMaxY;
+    private List<FallingBloom> fallingBloomList = new ArrayList<>();
+
+    //Crown of a tree
+    private float bloomsDx;
+    private float bloomsDy;
+    private LinkedList<Bloom> growingBlooms = new LinkedList<>();
+    private LinkedList<Bloom> cacheBlooms = new LinkedList<>();
 
     public Tree(int canvasWidth, int canvasHeight) {
         //数据初始化
         resolutionFactor = canvasHeight / 1080f;
-//        TreeMaker.init(canvasHeight, CROWN_RADIUS_FACTORY);
+        TreeMaker.init(canvasHeight, CROWN_RADIUS_FACTORY);
 
         //snapshot
         float snapshotWidth = 816f * STAND_FACTORY * resolutionFactor;
@@ -52,10 +67,21 @@ public class Tree {
         //Branches
         float branchesWidth = 375f * BRANCHES_FACTORY * resolutionFactor;
         float branchesHeight = 490f * BRANCHES_FACTORY * resolutionFactor;
-        branchesDx = (canvasWidth-branchesWidth) / 2f;
+        snapshotDx = (canvasWidth - snapshotWidth) / 2f;
+        branchesDx = (canvasWidth - branchesWidth) / 2f;
         branchesDy = canvasHeight - branchesHeight;
         growingBranches.add(TreeMaker.getBranches());
 
+        //Blooms
+        bloomsDx = snapshotWidth / 2f;
+        bloomsDy = 435f * STAND_FACTORY * resolutionFactor;
+        TreeMaker.fillBlooms(cacheBlooms, BLOOM_NUM);
+
+        //Moving snapshot
+        maxOffset = (canvasWidth - snapshotWidth) / 2f - 40f;
+        //Falling blooms
+        fMaxY = canvasHeight - bloomsDy;
+        TreeMaker.fillFallingBlooms(fallingBloomList, 3);
     }
 
     public void draw(Canvas canvas) {
@@ -68,15 +94,60 @@ public class Tree {
                 drawSnapshot(canvas);
                 break;
             case BLOOMS_GROWING:
+                drawBlooms();
+                drawSnapshot(canvas);
                 break;
-            case BLOOPS_FALLING:
+            case BLOOMS_FALLING:
+                drawSnapshot(canvas);
+                drawFallingBlooms(canvas);
                 break;
             case MOVING_SNAPSHOT:
+                movingSnapshot();
+                drawSnapshot(canvas);
                 break;
         }
         canvas.restore();
     }
 
+    private void drawFallingBlooms(Canvas canvas) {
+            Iterator<FallingBloom>iterator =fallingBloomList.iterator();
+            canvas.save();
+            canvas.translate(bloomsDx,bloomsDy);
+            while (iterator.hasNext()){
+                FallingBloom bloom = iterator.next();
+                if(bloom.fall(canvas,fMaxY)){
+                    iterator.remove();
+                    TreeMaker.recycleBloom(bloom);
+                }
+            }
+            canvas.restore();
+            if(fallingBloomList.size()<3){
+                TreeMaker.fillFallingBlooms(fallingBloomList,CommonUtil.random(1,2));
+            }
+    }
+
+    //绘制树叶
+    private void drawBlooms() {
+        while (growingBlooms.size() < BLOOMING_NUM && !cacheBlooms.isEmpty()) {
+            growingBlooms.add(cacheBlooms.pop());
+        }
+        Iterator<Bloom> iterator = growingBlooms.iterator();
+        treeSnapshot.canvas.save();
+        treeSnapshot.canvas.translate(bloomsDx,bloomsDy);
+        while (iterator.hasNext()){
+            Bloom bloom = iterator.next();
+            if(!bloom.grow(treeSnapshot.canvas)){
+                    iterator.remove();
+            }
+        }
+        treeSnapshot.canvas.restore();
+        if(growingBlooms.isEmpty()&&cacheBlooms.isEmpty()){
+            step = Step.MOVING_SNAPSHOT;
+        }
+
+    }
+
+    //绘制树干
     private void drawBranches() {
         if (!growingBranches.isEmpty()) {
             LinkedList<Branch> tempBranches = null;
@@ -87,7 +158,7 @@ public class Tree {
             while (iterator.hasNext()) {
                 Branch branch = iterator.next();
                 if (!branch.grow(treeSnapshot.canvas, BRANCHES_FACTORY * resolutionFactor)) {
-                    iterator.remove();
+                    iterator.remove();//节省内存开支
                     if (branch.childList != null) {
                         if (tempBranches == null) {
                             tempBranches = branch.childList;
@@ -104,7 +175,7 @@ public class Tree {
         }
         if (growingBranches.isEmpty()) {
             //绘制树干完成
-//            step = Step.BLOOMS_GROWING;
+            step = Step.BLOOMS_GROWING;
         }
 
     }
@@ -112,4 +183,13 @@ public class Tree {
     private void drawSnapshot(Canvas canvas) {
         canvas.drawBitmap(treeSnapshot.bitmap, 0, 0, snapshotPaint);
     }
+
+    private void movingSnapshot() {
+        if (xOffset > maxOffset) {
+            step = Step.BLOOMS_FALLING;
+        } else {
+            xOffset += 4f;
+        }
+    }
+
 }
