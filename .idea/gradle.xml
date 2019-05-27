@@ -10,8 +10,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CommonApp" />
             <option value="$PROJECT_DIR$/NDKModule" />
+            <option value="$PROJECT_DIR$/PluginLibrary" />
             <option value="$PROJECT_DIR$/RecyclerAdapter" />
             <option value="$PROJECT_DIR$/UiTreeModule" />
+            <option value="$PROJECT_DIR$/hearttreelib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

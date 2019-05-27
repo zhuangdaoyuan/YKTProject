@@ -55,19 +55,33 @@ public class TreeMaker {
         }
     }
 
-    public static void fillBlooms(List<Bloom> bloomList, int num) {
+
+
+    public static void fillFallingBlooms(List<FallingBloom> blooms, int num) {
         int n = 0;
-        while (n < num && p > 0) {
-            bloomList.add(sRecycleBlooms[--p]);
+        while(n < num && p > 0){
+            blooms.add(sRecycleBlooms[--p]);
             n++;
+        }
+        while(n < num){
+            float x = CommonUtil.random(-c, c);
+            float y = CommonUtil.random(-c, c);
+            if (inHeart(x, y, r)) {
+                blooms.add(new FallingBloom(new Point(x, -y)));
+                n++;
+            }
         }
     }
 
-    public static void fillFallingBlooms(List<FallingBloom> bloomList, int num) {
+    public static void fillBlooms(List<Bloom> blooms, int num) {
         int n = 0;
-        while (n < num && p > 0) {
-            bloomList.add(sRecycleBlooms[--p]);
-            n++;
+        while (n < num) {
+            float x = CommonUtil.random(-c, c);
+            float y = CommonUtil.random(-c, c);
+            if (inHeart(x, y, r)) {
+                blooms.add(new Bloom(new Point(x, -y)));
+                n++;
+            }
         }
     }
 

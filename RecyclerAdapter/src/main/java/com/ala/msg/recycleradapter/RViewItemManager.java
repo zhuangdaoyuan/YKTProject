@@ -41,7 +41,7 @@ public class RViewItemManager<T> {
     }
 
     //将视图和数据源绑定显示
-    public void conver(RViewHolder holder, T entity, int position) {
+    public void convert(RViewHolder holder, T entity, int position) {
         for (int i = 0; i < styles.size(); i++) {
             RViewItem<T> item = styles.valueAt(i);
             if(item.isItemView(entity,position)){

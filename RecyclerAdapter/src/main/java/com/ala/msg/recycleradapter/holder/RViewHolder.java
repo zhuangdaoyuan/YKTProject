@@ -49,4 +49,3 @@ public class RViewHolder extends RecyclerView.ViewHolder {
     }
 
 }
-a

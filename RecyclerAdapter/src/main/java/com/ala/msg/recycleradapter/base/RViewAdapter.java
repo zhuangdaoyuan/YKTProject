@@ -20,9 +20,11 @@ import java.util.List;
 public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
     private ItemListener<T> itemListener;
     private List<T> datas;//数据源
-    private RViewItemManager itemStyle;//item类型管理
+    private final static long QUICK_EVENT_TIME_SPAN = 1000;//事件阻塞
+    private RViewItemManager<T> itemStyle;//item类型管理
+    private long lastClickTime;
 
-    //判断样式
+    //判断样式--单样式
     public RViewAdapter(List<T> datas) {
         if (datas == null) {
             this.datas = new ArrayList<>();
@@ -31,10 +33,11 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
         itemStyle = new RViewItemManager();
     }
 
+    //多样式
     public RViewAdapter(List<T> datas, RViewItem<T> item) {
         if (datas == null) this.datas = new ArrayList<>();
         this.datas = datas;
-        itemStyle = new RViewItemManager();
+        itemStyle = new RViewItemManager<>();
         addItemStyle(item);
     }
 
@@ -46,6 +49,7 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
     public void addDatas(List<T> datas) {
         if (datas == null) return;
         this.datas.addAll(datas);
+        notifyDataSetChanged();
     }
 
     //xiugaishuju
@@ -57,13 +61,13 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
     }
 
     //是否有多样式
-    private boolean hasMultyItem() {
+    private boolean hasMultiItem() {
         return itemStyle.getItemViewStylesCount() > 0;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (hasMultyItem()) {
+        if (hasMultiItem()) {
             return itemStyle.getItemViewStyle(datas.get(position), position);
         }
         return super.getItemViewType(position);
@@ -83,7 +87,11 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RViewHolder holder, int position) {
-        conver(holder,position);
+        convert(holder, datas.get(position));
+    }
+
+    private void convert(RViewHolder holder, T entity) {
+        itemStyle.convert(holder, entity, holder.getAdapterPosition());
     }
 
     private void setListener(final RViewHolder rViewHolder) {
@@ -111,6 +119,13 @@ public class RViewAdapter<T> extends RecyclerView.Adapter<RViewHolder> {
     }
 
 
+    public void addItemStyles(RViewItem<T> item) {
+        itemStyle.addStyles(item);
+    }
+
+    public void setItemListener(ItemListener<T> itemListener) {
+        this.itemListener = itemListener;
+    }
 
 
     @Override

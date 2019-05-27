@@ -17,7 +17,7 @@ public class Heart {
         for (int i = 0; i < n; i++) {
             float x = (float) (16 * (Math.pow(Math.sin(t), 3)));
             float y = (float) (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
-            points[i] = new Point(x * SCALE_FACTORY, y * SCALE_FACTORY);
+            points[i] = new Point(x * SCALE_FACTORY, -y * SCALE_FACTORY);
             t += dt;
             if (i == 0) {
                 PATH.moveTo(points[i].x, points[i].y);
