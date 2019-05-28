@@ -1,5 +1,4 @@
 #include "gif.h"
-#include "../../../../../Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/jni.h"
 #include <android/bitmap.h>
 
 int lockPixels(JNIEnv *env, jobject jbitmap, GifInfo *info, void **pixels) {
