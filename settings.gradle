@@ -1,5 +1,6 @@
-include ':NDKModule', ':PluginLibrary'
+//include ':NDKModule'
+include ':PluginLibrary', ':GifLibrary'
 include ':CommonApp'
 include ':RecyclerAdapter'
 include ':UiTreeModule'
-include':hearttreelib'
+
