@@ -219,3 +219,7 @@ uint_fast32_t seek(GifInfo *info, uint_fast32_t desiredIndex, void *pixels);
 void setGCBDefaults(GraphicsControlBlock *gcb);
 
 static GifInfo *createGifInfoFromFile(JNIEnv *env, FILE *file, long long sourceLength);
+
+jlong GifInfo *Java_pl_droidsonroids_gif_GifInfoHandle_openFile(JNIEvn *evn,jobject *object,jstring filePath);
+
+jlong openFile(JNIEnv *env,jstring jfname) ;

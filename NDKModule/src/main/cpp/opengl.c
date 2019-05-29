@@ -158,3 +158,10 @@ Java_pl_droidsonroids_gif_GifInfoHandle_seekToFrameGL(__unused JNIEnv *env, jcla
 	seek(info, (uint_fast32_t) desiredIndex, descriptor->frameBuffer);
 }
 
+JNIEXPORT jlong JNICALL
+Java_com_mm_zdy_yktproject_GifInfoHandle(JNIEnv *env,jobject instance,jstring path_){
+    const char *path = (*env)->GetStringUTFChars(env,path_,0);
+
+    (*env)->ReleaseStringUTFChars(env,path_,path);
+}
+

@@ -131,8 +131,7 @@ int directByteBufferRewind(GifInfo *info) {
 	return 0;
 }
 
-__unused JNIEXPORT jlong JNICALL
-Java_pl_droidsonroids_gif_GifInfoHandle_openFile(JNIEnv *env, jclass __unused class, jstring jfname) {
+jlong openFile(JNIEnv *env, jclass __unused class, jstring jfname) {
 	if (isSourceNull(jfname, env)) {
 		return NULL_GIF_INFO;
 	}
