@@ -2,9 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
-
-
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -24,10 +21,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
+        externalNativeBuild {
+            cmake {
+                path "CMakeLists.txt"
+            }
         }
     }
 

@@ -1,6 +1,7 @@
-//include ':NDKModule'
-include ':PluginLibrary', ':GifLibrary'
+include ':NDKModule', ':DBModule', ':QRCodeLibrary', ':QRCodeModule'
+//include ':PluginLibrary'
+//include ':GifLibrary'
 include ':CommonApp'
-include ':RecyclerAdapter'
+include ':RecyclerAdapterLibrary'
 include ':UiTreeModule'
 

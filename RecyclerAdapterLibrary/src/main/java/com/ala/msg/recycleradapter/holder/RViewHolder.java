@@ -18,7 +18,7 @@ public class RViewHolder extends RecyclerView.ViewHolder {
     //一个布局，多个控件
     private SparseArray<View> mViews;
 
-    //当前View对象
+    //当前View(布局)对象
     private View mContentView;
 
     //不能开放private

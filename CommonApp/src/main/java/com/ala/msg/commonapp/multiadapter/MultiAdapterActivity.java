@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.ala.msg.commonapp.R;
 import com.ala.msg.recycleradapter.base.RViewAdapter;
+import com.ala.msg.recycleradapter.listener.ItemListener;
 import com.netease.ioc.library.annotations.ContentView;
 import com.netease.ioc.library.annotations.OnItemClick;
 
@@ -24,6 +25,21 @@ public class MultiAdapterActivity extends BaseRecyclerViewActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initDatas();
+        setListener();
+    }
+
+    private void setListener() {
+        adapter.setItemListener(new ItemListener<UserInfo>() {
+            @Override
+            public void onItemClick(View view, UserInfo entity, int position) {
+
+            }
+
+            @Override
+            public void onItemLongClick(View view, UserInfo entity, int position) {
+
+            }
+        });
     }
 
     @Override

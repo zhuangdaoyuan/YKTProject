@@ -46,6 +46,7 @@ public class RViewItemManager<T> {
             RViewItem<T> item = styles.valueAt(i);
             if(item.isItemView(entity,position)){
                 item.convert(holder,entity,position);
+                return;
             }
         }
         throw new IllegalArgumentException("");
