@@ -8,11 +8,11 @@ set(SOURCES)
 
 file(GLOB_RECURSE SOURCES "*.c")
 
-if((${ANDROID_ABI} STREQUAL "armeabi") OR (${ANDROID_ABI} STREQUAL "armeabi-v7a"))
+if((${ANDROID_ABI} STREQUAL "armeabi") OR ${ANDROID_ABI} STREQUAL "armeabi-v7a"))
     list(APPEND SOURCES	memset.arm.S)
 endif((${ANDROID_ABI} STREQUAL "armeabi") OR (${ANDROID_ABI} STREQUAL "armeabi-v7a"))
 
-add_library(pl_droidsonroids_gif SHARED ${SOURCES})
+add_library( native-lib SHARED ${SOURCES})
 
 set(LIBS)
 list(APPEND LIBS
@@ -22,4 +22,4 @@ list(APPEND LIBS
     log
 )
 
-target_link_libraries(pl_droidsonroids_gif ${LIBS})
+target_link_libraries( native-lib ${LIBS})

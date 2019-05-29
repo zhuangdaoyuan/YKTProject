@@ -74,12 +74,12 @@
 #define D_GIF_ERR_INVALID_BYTE_BUFFER    1005
 
 enum Exception {
-	RUNTIME_EXCEPTION_ERRNO, RUNTIME_EXCEPTION_BARE, OUT_OF_MEMORY_ERROR, NULL_POINTER_EXCEPTION
+    RUNTIME_EXCEPTION_ERRNO, RUNTIME_EXCEPTION_BARE, OUT_OF_MEMORY_ERROR, NULL_POINTER_EXCEPTION
 };
 
 typedef struct {
-	GifColorType rgb;
-	uint8_t alpha;
+    GifColorType rgb;
+    uint8_t alpha;
 } argb;
 
 typedef struct GifInfo GifInfo;
@@ -88,58 +88,59 @@ typedef int
 (*RewindFunc)(GifInfo *);
 
 struct GifInfo {
-	void (*destructor)(GifInfo *, JNIEnv *);
-	GifFileType *gifFilePtr;
-	GifWord originalWidth, originalHeight;
-	uint_fast16_t sampleSize;
-	long long lastFrameRemainder;
-	long long nextStartTime;
-	uint_fast32_t currentIndex;
-	GraphicsControlBlock *controlBlock;
-	argb *backupPtr;
-	long long startPos;
-	unsigned char *rasterBits;
-	uint_fast32_t rasterSize;
-	char *comment;
-	uint_fast16_t loopCount;
-	uint_fast16_t currentLoop;
-	RewindFunc rewindFunction;
-	jfloat speedFactor;
-	uint32_t stride;
-	jlong sourceLength;
-	bool isOpaque;
-	void *frameBufferDescriptor;
+    void (*destructor)(GifInfo *, JNIEnv *);
+
+    GifFileType *gifFilePtr;
+    GifWord originalWidth, originalHeight;
+    uint_fast16_t sampleSize;
+    long long lastFrameRemainder;
+    long long nextStartTime;
+    uint_fast32_t currentIndex;
+    GraphicsControlBlock *controlBlock;
+    argb *backupPtr;
+    long long startPos;
+    unsigned char *rasterBits;
+    uint_fast32_t rasterSize;
+    char *comment;
+    uint_fast16_t loopCount;
+    uint_fast16_t currentLoop;
+    RewindFunc rewindFunction;
+    jfloat speedFactor;
+    uint32_t stride;
+    jlong sourceLength;
+    bool isOpaque;
+    void *frameBufferDescriptor;
 };
 
 typedef struct {
-	jobject stream;
-	jmethodID readMethodID;
-	jmethodID resetMethodID;
-	jmethodID closeMethodID;
-	jbyteArray buffer;
-	jint bufferPosition;
-	bool markCalled;
+    jobject stream;
+    jmethodID readMethodID;
+    jmethodID resetMethodID;
+    jmethodID closeMethodID;
+    jbyteArray buffer;
+    jint bufferPosition;
+    bool markCalled;
 } StreamContainer;
 
 typedef struct {
-	uint_fast32_t position;
-	jbyteArray buffer;
-	unsigned int length;
+    uint_fast32_t position;
+    jbyteArray buffer;
+    unsigned int length;
 } ByteArrayContainer;
 
 typedef struct {
-	jlong position;
-	jbyte *bytes;
-	jlong capacity;
-	jobject bufferRef;
+    jlong position;
+    jbyte *bytes;
+    jlong capacity;
+    jobject bufferRef;
 } DirectByteBufferContainer;
 
 typedef struct {
-	GifFileType *GifFileIn;
-	int Error;
-	long long startPos;
-	RewindFunc rewindFunc;
-	jlong sourceLength;
+    GifFileType *GifFileIn;
+    int Error;
+    long long startPos;
+    RewindFunc rewindFunc;
+    jlong sourceLength;
 } GifSourceDescriptor;
 
 void DetachCurrentThread(void);
@@ -202,7 +203,8 @@ int lockPixels(JNIEnv *env, jobject jbitmap, GifInfo *info, void **pixels);
 
 void unlockPixels(JNIEnv *env, jobject jbitmap);
 
-long long calculateInvalidationDelay(GifInfo *info, long renderStartTime, uint_fast32_t frameDuration);
+long long
+calculateInvalidationDelay(GifInfo *info, long renderStartTime, uint_fast32_t frameDuration);
 
 jint restoreSavedState(GifInfo *info, JNIEnv *env, jlongArray state, void *pixels);
 
@@ -220,10 +222,12 @@ void setGCBDefaults(GraphicsControlBlock *gcb);
 
 static GifInfo *createGifInfoFromFile(JNIEnv *env, FILE *file, long long sourceLength);
 
-jlong openFile(JNIEnv *env,jstring jfname) ;
+jlong openFile(JNIEnv *env, jstring jfname);
 
-long renderFrame(JNIEnv *env, jclass  handleClass, jlong gifInfo, jobject jbitmap);
+jlong openStream(JNIEnv *env,jstring jfname);
 
-jint  getWidth(GifInfo *info);
+jlong renderFrame(JNIEnv *env, jlong gifInfo, jobject jbitmap);
 
-jint  getHeight(GifInfo *info);
+jint getWidth(GifInfo *info);
+
+jint getHeight(GifInfo *info);

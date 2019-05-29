@@ -19,7 +19,7 @@ void DetachCurrentThread(void) {
 	(*g_jvm)->DetachCurrentThread(g_jvm);
 }
 
-__unused JNIEXPORT jint JNICALL
+ JNIEXPORT jint JNICALL
 JNI_OnLoad(JavaVM *vm, void *__unused reserved) {
 	g_jvm = vm;
 	JNIEnv *env;
@@ -47,7 +47,7 @@ JNI_OnLoad(JavaVM *vm, void *__unused reserved) {
 	return JNI_VERSION_1_6;
 }
 
-__unused JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *__unused vm, void *__unused reserved) {
+JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *__unused vm, void *__unused reserved) {
 	GifFreeMapObject(defaultCmap);
 }
 

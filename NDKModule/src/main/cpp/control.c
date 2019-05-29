@@ -1,6 +1,4 @@
 #include "gif.h"
-#include "../../../../../Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/jni.h"
-#include "../../../../../Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/stdint.h"
 
 bool reset(GifInfo *info) {
 	if (info->rewindFunction(info) != 0) {

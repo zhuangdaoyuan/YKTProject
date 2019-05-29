@@ -2,6 +2,8 @@ package com.mm.zdy.yktproject;
 
 import android.graphics.Bitmap;
 
+import java.io.InputStream;
+
 /**
  * Created by zhuangdaoyuan on 2019/5/29.
  * 安静撸码，淡定做人
@@ -19,10 +21,15 @@ public class GifInfoHandle {
        gifInfoPtr = openFile(filePath);
     }
 
+    public GifInfoHandle(InputStream inputStream){
+        gifInfoPtr = openStream(inputStream);
+    }
+
+
+
     //下一次渲染间隔时间
     public long renderFrame(Bitmap bitmap){
        return renderFrame(gifInfoPtr,bitmap);
-
     }
 
     public synchronized  int getWidth(){
@@ -33,6 +40,8 @@ public class GifInfoHandle {
     }
 
     private native long openFile(String path);
+
+    private native long openStream(InputStream inputStream);
 
     private native long renderFrame(long gifInfoPtr, Bitmap bitmap);
 
