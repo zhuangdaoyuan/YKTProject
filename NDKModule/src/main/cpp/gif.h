@@ -220,6 +220,10 @@ void setGCBDefaults(GraphicsControlBlock *gcb);
 
 static GifInfo *createGifInfoFromFile(JNIEnv *env, FILE *file, long long sourceLength);
 
-jlong GifInfo *Java_pl_droidsonroids_gif_GifInfoHandle_openFile(JNIEvn *evn,jobject *object,jstring filePath);
-
 jlong openFile(JNIEnv *env,jstring jfname) ;
+
+long renderFrame(JNIEnv *env, jclass  handleClass, jlong gifInfo, jobject jbitmap);
+
+jint  getWidth(GifInfo *info);
+
+jint  getHeight(GifInfo *info);

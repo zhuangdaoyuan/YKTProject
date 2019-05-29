@@ -1,4 +1,6 @@
 #include "gif.h"
+#include "../../../../../Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/jni.h"
+#include "../../../../../Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/stdint.h"
 #include <android/bitmap.h>
 
 int lockPixels(JNIEnv *env, jobject jbitmap, GifInfo *info, void **pixels) {
@@ -54,8 +56,8 @@ void unlockPixels(JNIEnv *env, jobject jbitmap) {
 	throwException(env, RUNTIME_EXCEPTION_BARE, message);
 }
 
-__unused JNIEXPORT jlong JNICALL
-Java_pl_droidsonroids_gif_GifInfoHandle_renderFrame(JNIEnv *env, jclass __unused handleClass, jlong gifInfo, jobject jbitmap) {
+//将gifInfo信息渲染成bitmap
+jlong renderFrame(JNIEnv *env, jclass  handleClass, jlong gifInfo, jobject jbitmap) {
 	GifInfo *info = (GifInfo *) (intptr_t) gifInfo;
 	if (info == NULL)
 		return -1;

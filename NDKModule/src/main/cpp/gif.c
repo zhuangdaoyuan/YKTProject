@@ -1,4 +1,7 @@
 #include "gif.h"
+#include "../../../../../Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/jni.h"
+#include "../../../../../Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/stdint.h"
+#include "../../../../../Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/stdio.h"
 
 uint_fast8_t fileRead(GifFileType *gif, GifByteType *bytes, uint_fast8_t size) {
 	FILE *file = (FILE *) gif->UserData;
@@ -370,4 +373,11 @@ static GifInfo *createGifInfoFromFile(JNIEnv *env, FILE *file, const long long s
 	descriptor.startPos = ftell(file);
 
 	return createGifInfo(&descriptor, env);
+}
+
+
+
+
+jint getHeight(GifInfo *info){
+	return info->originalHeight;
 }
