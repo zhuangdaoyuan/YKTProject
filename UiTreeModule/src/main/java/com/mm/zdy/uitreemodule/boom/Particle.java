@@ -28,7 +28,8 @@ public abstract class Particle {
      * @param factor 适配大小
      */
     public void advance(Canvas canvas, Paint paint,float factor){
-
+        calculate(factor);
+        draw(canvas,paint);
     }
 
 }

@@ -15,12 +15,13 @@ public class Utils {
 //    3.执行动画 1>震动 2>缩小透明---爆炸 3>爆炸结束--view恢复
     private static final Canvas CANVAS = new Canvas();
     public static Bitmap createBitmapFromView(View view){
-        view.clearFocus();;//使view恢复原样
+        view.clearFocus();//使view恢复原样
         Bitmap bitmap = createBitmapSafely(view.getWidth(),view.getHeight(),Bitmap.Config.ARGB_8888,1);
         if (bitmap!=null){
             synchronized (CANVAS){
+                CANVAS.setBitmap(bitmap);
                 view.draw(CANVAS);
-                CANVAS.restore();
+                CANVAS.setBitmap(null);
             }
         }
         return bitmap;

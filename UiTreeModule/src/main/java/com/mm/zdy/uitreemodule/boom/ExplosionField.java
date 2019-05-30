@@ -17,16 +17,16 @@ import java.util.HashMap;
 public class ExplosionField extends View {
 
     private OnClickListener onClickListener;
-    private ArrayList<ExplotionAnimator> explotionAnimators;
-    private HashMap<View, ExplotionAnimator> explotionAnimatorHashMap;
-    private ParticleFactory particleFactory;
+    private ArrayList<ExplosionAnimator> explosionAnimators;
+    private HashMap<View, ExplosionAnimator> explosionAnimatorHashMap;
+    private ParticleFactory mParticleFactory;
 
     public ExplosionField(Context context, ParticleFactory factory) {
         super(context);
         attachActivity((Activity) context);
-        explotionAnimators = new ArrayList<>();
-        explotionAnimatorHashMap = new HashMap<>();
-        particleFactory = factory;
+        explosionAnimators = new ArrayList<>();
+        explosionAnimatorHashMap = new HashMap<>();
+        mParticleFactory = factory;
     }
 
     /**
@@ -35,8 +35,8 @@ public class ExplosionField extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        for (ExplotionAnimator explotionAnimator : explotionAnimators) {
-            explotionAnimator.draw(canvas);
+        for (ExplosionAnimator explosionAnimator : explosionAnimators) {
+            explosionAnimator.draw(canvas);
         }
     }
 
@@ -48,10 +48,10 @@ public class ExplosionField extends View {
     public void explode(final View view) {
 
         //防止重复
-        if(explotionAnimatorHashMap.get(view)!=null&&explotionAnimatorHashMap.get(view).isStarted()){
+        if (explosionAnimatorHashMap.get(view) != null && explosionAnimatorHashMap.get(view).isStarted()) {
             return;
         }
-        if(view.getVisibility()!=VISIBLE&&view.getAlpha()!=0){
+        if (view.getVisibility() != VISIBLE && view.getAlpha() != 0) {
 
         }
 
@@ -103,24 +103,25 @@ public class ExplosionField extends View {
      */
     private void explode(final View view, Rect rect) {
         //粒子爆炸
-        final ExplotionAnimator animator = new ExplotionAnimator(this,Utils.createBitmapFromView(view),rect,mParticalFactory);
-        explotionAnimators.add(animator);
-        explotionAnimatorHashMap.put(view,animator);
+        final ExplosionAnimator animator = new ExplosionAnimator(this, Utils.createBitmapFromView(view), rect, mParticleFactory);
+        explosionAnimators.add(animator);
+        explosionAnimatorHashMap.put(view, animator);
         animator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
-
+                view.setClickable(false);
+                view.animate().setDuration(150).scaleX(1f).scaleY(1f).alpha(1f).start();
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
                 view.setClickable(true);
                 view.animate().setDuration(150).scaleX(0f).scaleY(0f).alpha(0f).start();
+                //移除动画
+                explosionAnimators.remove(animator);
+                explosionAnimatorHashMap.remove(view);
 
-                //一处动画
-                explotionAnimators.remove(animator);
-                explotionAnimatorHashMap.remove(view);
 
             }
         });
@@ -152,7 +153,7 @@ public class ExplosionField extends View {
                 @Override
                 public void onClick(View v) {
                     //执行粒子动画
-                    ExplosionField.this.e
+//                    ExplosionField.this.e
                 }
             };
         }
