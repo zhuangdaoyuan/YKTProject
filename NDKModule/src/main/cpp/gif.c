@@ -400,6 +400,7 @@ Java_pl_droidsonroids_gif_GifInfoHandle_openNativeFileDescriptor(JNIEnv *env,
     }
 }
 
+//根据file 获取Gif文件信息
 static GifInfo *createGifInfoFromFile(JNIEnv *env, FILE *file, const long long sourceLength) {
     GifSourceDescriptor descriptor = {
             .rewindFunc = fileRewind,
