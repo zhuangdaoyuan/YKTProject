@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="splash_circle_colors">
+        <item>#FF0000</item>
+        <item>#F5C403</item>
+        <item>#303F9F</item>
+        <item>#33AF05</item>
+        <item>#9E05AF</item>
+        <item>#0A98BC</item>
+    </array>
+</resources>
