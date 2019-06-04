@@ -1,5 +1,7 @@
 package com.mm.zdy.uitreemodule.lizi;
 
+import android.animation.Animator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,6 +10,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
 
 import com.mm.zdy.uitreemodule.R;
 
@@ -77,15 +80,10 @@ public class SplashView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.save();
-        mHolePaint.setColor(Color.RED);
-        mHolePaint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(mCenterX,mCenterY,20,mHolePaint);
-        canvas.restore();
-//        if (mState == null) {
-//            mState = new RotateState();
-//        }
-//        mState.drawState(canvas);
+        if (mState == null) {
+            mState = new RotateState();
+        }
+        mState.drawState(canvas);
     }
 
     private SplashState mState;
@@ -96,24 +94,50 @@ public class SplashView extends View {
 
     //1.旋转
     private class RotateState extends SplashState {
-        private RotateState (){
-            mValueAnimator = ValueAnimator.ofFloat(0, (float) (Math.PI*2));
+        private RotateState() {
+            mValueAnimator = ValueAnimator.ofFloat(0, (float) (Math.PI * 2));
             mValueAnimator.setRepeatCount(2);
             mValueAnimator.setDuration(mRotationDuration);
             mValueAnimator.setInterpolator(new LinearInterpolator());
             mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    mCurrentRotateAngle  = (float) animation.getAnimatedValue();
+                    mCurrentRotateAngle = (float) animation.getAnimatedValue();
                     invalidate();
                 }
+
+
             });
-            mValueAnimator .start();
+            mValueAnimator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mState = new MergeState();
+                    invalidate();
+
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+            mValueAnimator.start();
         }
+
         @Override
         void drawState(Canvas canvas) {
             //绘制背景
-            drawBackground(canvas);
+//            drawBackground(canvas);
             //绘制6个小球
             drawCircles(canvas);
         }
@@ -125,20 +149,96 @@ public class SplashView extends View {
         for (int i = 0; i < mCircleColor.length; i++) {
             //x = r *cos(a)+centX;
             //y = r*sin(a) +centY;
-            float angle = i * rotateAngle +mCurrentRotateAngle;
-            float cx = (float) (Math.cos(angle) * mRotateRadius + mCenterY);
-            float cy = (float) (Math.sin(angle) * mRotateRadius + mCenterY);
+            float angle = i * rotateAngle + mCurrentRotateAngle;
+            float cx = (float) (Math.cos(angle) * mCurrentRotateRadius + mCenterX);
+            float cy = (float) (Math.sin(angle) * mCurrentRotateRadius + mCenterY);
             mPaint.setColor(mCircleColor[i]);
             canvas.drawCircle(cx, cy, mCircleRadius, mPaint);
         }
     }
 
     private void drawBackground(Canvas canvas) {
-        canvas.drawColor(mBackgroundColor);
+        if(mState instanceof ExpandState){
+            float strokeWidth = mDistance  - mCurrentHoleRadius;
+            float radius = strokeWidth/2+mCurrentHoleRadius;
+            mHolePaint.setStrokeWidth(strokeWidth);
+            canvas.drawCircle(mCenterX,mCenterY,radius,mHolePaint);
+        }else {
+            canvas.drawColor(mBackgroundColor);
+        }
     }
 
     //2.扩散聚合
 
+    private class MergeState extends SplashState {
+        private MergeState() {
+//            mValueAnimator = ValueAnimator.ofFloat(mRotateRadius, mCircleRadius);
+            mValueAnimator = ValueAnimator.ofFloat(mCircleRadius, mRotateRadius);
+//            mValueAnimator.setRepeatCount(1);
+            mValueAnimator.setDuration(mRotationDuration);
+//            mValueAnimator.setInterpolator(new LinearInterpolator());
+            mValueAnimator.setInterpolator(new OvershootInterpolator());
+            mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mCurrentRotateRadius = (float) animation.getAnimatedValue();
+                    invalidate();
+                }
+            });
+            mValueAnimator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                        mState = new ExpandState();
+                        invalidate();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+
+//            mValueAnimator.start();
+            mValueAnimator.reverse();
+        }
+
+        @Override
+        void drawState(Canvas canvas) {
+            drawBackground(canvas);
+            drawCircles(canvas);
+        }
+    }
+
     //3.水波纹
+    private class ExpandState extends  SplashState{
+        private ExpandState(){
+            mValueAnimator = ValueAnimator.ofFloat(mCurrentRotateRadius,mDistance);
+            mValueAnimator.setDuration(mRotationDuration);
+            mValueAnimator.setInterpolator(new LinearInterpolator());
+            mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mCurrentHoleRadius = (float)animation.getAnimatedValue();
+                    invalidate();
+                }
+            });
+            mValueAnimator.start();
+        }
+
+        @Override
+        void drawState(Canvas canvas) {
+            drawBackground(canvas);
+        }
+    }
 
 }
