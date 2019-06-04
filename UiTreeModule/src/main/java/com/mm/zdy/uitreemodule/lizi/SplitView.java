@@ -6,13 +6,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.mm.zdy.uitreemodule.R;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class SplitView extends View {
     private Paint mPaint;
     private Bitmap mBitmap;
     private List<Ball> mBallList = new ArrayList<>();
-    private float d = 3;//粒子直径
+    private float d = 5;//粒子直径
 
     private ValueAnimator valueAnimator;
 
@@ -42,7 +43,7 @@ public class SplitView extends View {
 
     private void init() {
         mPaint = new Paint();
-        mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.a);
+        mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.aa);
         for (int i = 0; i < mBitmap.getWidth(); i++) {
             for (int j = 0; j < mBitmap.getHeight(); j++) {
                 Ball ball = new Ball();

@@ -5,12 +5,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.mm.zdy.uitreemodule.R;
+
+import org.jetbrains.annotations.Nullable;
 
 public class SplashView extends View {
 
@@ -76,10 +77,15 @@ public class SplashView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (mState == null) {
-            mState = new RotateState();
-        }
-        mState.drawState(canvas);
+        canvas.save();
+        mHolePaint.setColor(Color.RED);
+        mHolePaint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(mCenterX,mCenterY,20,mHolePaint);
+        canvas.restore();
+//        if (mState == null) {
+//            mState = new RotateState();
+//        }
+//        mState.drawState(canvas);
     }
 
     private SplashState mState;
@@ -119,7 +125,7 @@ public class SplashView extends View {
         for (int i = 0; i < mCircleColor.length; i++) {
             //x = r *cos(a)+centX;
             //y = r*sin(a) +centY;
-            float angle = i * rotateAngle;
+            float angle = i * rotateAngle +mCurrentRotateAngle;
             float cx = (float) (Math.cos(angle) * mRotateRadius + mCenterY);
             float cy = (float) (Math.sin(angle) * mRotateRadius + mCenterY);
             mPaint.setColor(mCircleColor[i]);

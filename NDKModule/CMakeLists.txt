@@ -12,7 +12,7 @@ if((${ANDROID_ABI} STREQUAL "armeabi") OR (${ANDROID_ABI} STREQUAL "armeabi-v7a"
     list(APPEND SOURCES	memset.arm.S)
 endif((${ANDROID_ABI} STREQUAL "armeabi") OR (${ANDROID_ABI} STREQUAL "armeabi-v7a") OR (${ANDROID_ABI} STREQUAL "x86_64"))
 
-add_library(native-lib SHARED ${SOURCES})
+add_library(nativeLib SHARED ${SOURCES})
 
 set(LIBS)
 list(APPEND LIBS
@@ -22,4 +22,4 @@ list(APPEND LIBS
     log
 )
 
-target_link_libraries( native-lib ${LIBS})
+target_link_libraries(nativeLib ${LIBS})

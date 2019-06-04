@@ -1,4 +1,5 @@
-include ':NDKModule', ':DBModule', ':QRCodeLibrary', ':QRCodeModule'
+//include ':NDKModule'
+include ':DBModule', ':QRCodeLibrary', ':QRCodeModule'
 //include ':PluginLibrary'
 //include ':GifLibrary'
 include ':CommonApp'

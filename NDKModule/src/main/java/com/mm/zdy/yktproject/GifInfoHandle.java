@@ -13,7 +13,7 @@ public class GifInfoHandle {
     private   volatile long gifInfoPtr;
     //调用native
     static {
-        System.loadLibrary("native-lib");
+        System.loadLibrary("nativeLib");
 
     }
 
