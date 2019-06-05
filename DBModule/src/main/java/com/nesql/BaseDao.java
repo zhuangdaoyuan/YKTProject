@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import java.lang.reflect.Field;
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -95,6 +96,18 @@ public class BaseDao<T> implements IBaseDao<T>{
         // 获取对象中的值
         Log.e("====>","成功插入"+result+"条数据");
         return result;
+    }
+
+    @Override
+    public ResultSet select(int id) {
+        // TODO: 2019/6/3  
+        return null;
+    }
+
+    @Override
+    public ResultSet selectAll() {
+        // TODO: 2019/6/3  
+        return null;
     }
 
     private ContentValues getContentValues(Map<String, String> map) {
