@@ -137,7 +137,7 @@ public class SplashView extends View {
         @Override
         void drawState(Canvas canvas) {
             //绘制背景
-//            drawBackground(canvas);
+            drawBackground(canvas);
             //绘制6个小球
             drawCircles(canvas);
         }

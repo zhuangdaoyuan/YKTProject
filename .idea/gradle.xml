@@ -10,7 +10,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CommonApp" />
             <option value="$PROJECT_DIR$/DBModule" />
-            <option value="$PROJECT_DIR$/NDKModule" />
             <option value="$PROJECT_DIR$/QRCodeLibrary" />
             <option value="$PROJECT_DIR$/QRCodeModule" />
             <option value="$PROJECT_DIR$/RecyclerAdapterLibrary" />
