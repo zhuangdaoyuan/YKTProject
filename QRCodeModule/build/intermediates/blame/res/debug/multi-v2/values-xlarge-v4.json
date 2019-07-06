@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/android/YKTProject/QRCodeModule/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
+            "outputFile": "F:\\YKTProject\\QRCodeModule\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
             "map": [
                 {
-                    "source": "/Users/android/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/4b75e3c14f2be6d341bef30c7c22844e/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "source": "C:\\Users\\zhuangdaoyuan\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\58f62771f5e75d1cd59dc4713395d1ce\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",

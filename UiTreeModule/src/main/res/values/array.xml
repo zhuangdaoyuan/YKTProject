@@ -8,4 +8,13 @@
         <item>#9E05AF</item>
         <item>#0A98BC</item>
     </array>
+
+    <declare-styleable name="BubbleView">
+        <attr name="originCircleRadius" format="dimension" />
+        <attr name="originCircleColor" format="color" />
+        <attr name="smallCircleRadius" format="dimension" />
+        <attr name="textContent" format="string" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+    </declare-styleable>
 </resources>

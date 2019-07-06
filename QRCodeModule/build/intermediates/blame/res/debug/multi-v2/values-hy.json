@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/android/YKTProject/QRCodeModule/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hy/values-hy.xml",
+            "outputFile": "F:\\YKTProject\\QRCodeModule\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hy\\values-hy.xml",
             "map": [
                 {
-                    "source": "/Users/android/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/ce1286ffd87fe23fc7a3bfe1dd88c269/res/values-hy/values-hy.xml",
+                    "source": "C:\\Users\\zhuangdaoyuan\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0.aar\\efce8ce42ebd1431c35b81dbc5b8f007\\res\\values-hy\\values-hy.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/android/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/4b75e3c14f2be6d341bef30c7c22844e/res/values-hy/values-hy.xml",
+                    "source": "C:\\Users\\zhuangdaoyuan\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\58f62771f5e75d1cd59dc4713395d1ce\\res\\values-hy\\values-hy.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

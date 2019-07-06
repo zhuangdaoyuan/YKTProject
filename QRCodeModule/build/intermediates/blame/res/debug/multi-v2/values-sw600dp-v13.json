@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/android/YKTProject/QRCodeModule/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "F:\\YKTProject\\QRCodeModule\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/android/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/4b75e3c14f2be6d341bef30c7c22844e/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\zhuangdaoyuan\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\58f62771f5e75d1cd59dc4713395d1ce\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
