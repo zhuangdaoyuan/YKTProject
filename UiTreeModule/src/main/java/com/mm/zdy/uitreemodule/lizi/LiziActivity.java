@@ -13,4 +13,3 @@ public class LiziActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view);
     }
 }
-w

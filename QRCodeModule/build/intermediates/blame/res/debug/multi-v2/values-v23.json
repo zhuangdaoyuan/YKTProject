@@ -4,7 +4,7 @@
             "outputFile": "F:\\YKTProject\\QRCodeModule\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\zhuangdaoyuan\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\58f62771f5e75d1cd59dc4713395d1ce\\res\\values-v23\\values-v23.xml",
+                    "source": "E:\\AndroidStudio\\gradle\\gradle-4.4\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\39dbedd3a6fccad05025345daf10cf57\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,19,32,33,34,35,36",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
